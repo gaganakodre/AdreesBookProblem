@@ -6,27 +6,28 @@ using System.Threading.Tasks;
 
 namespace AdressBook
 {
-    internal class AdressBook1
+    internal class AdressBook
     {
         
-            public string FirstName { get; set; }
-            //The get method returns the value of the variable name//The set method assigns a value to the name variable
-            public string LastName { get; set; }
-           
-            public string PhoneNumber { get; set; }
-            public string city  { get; set; }
-            public string Zip { get; set; }
-            public string Email { get; set; }
-            public string[] Addresses { get; set; }
-            public static List<AdressBook1> People = new List<AdressBook1>();
-
-            public static void AddPerson()
-            {
             
-            AdressBook1 person = new AdressBook1();
+        public  List<Contact> People = new List<Contact>();
 
-                Console.Write("Enter First Name: ");
-                person.FirstName = Console.ReadLine();
+        public  void AddPerson()
+        {
+            Contact person = new Contact();
+
+            Console.Write("Enter First Name: ");
+            person.FirstName = Console.ReadLine();
+            foreach (Contact contact in People)
+            {
+                if(contact.FirstName.ToLower()==person.FirstName.ToLower())
+                {
+                    Console.WriteLine("person already exist");
+                    return;
+                }
+            }
+            
+            
                 Console.Write("Enter Last Name: ");
                 person.LastName = Console.ReadLine();
                 Console.Write("Enter city name: ");
@@ -38,13 +39,57 @@ namespace AdressBook
                 Console.Write("Enter Phone Email: ");
                 person.PhoneNumber = Console.ReadLine();
                 Console.Write("Enter Address 1: ");
-                string[] addresses = new string[2];
-                addresses[0] = Console.ReadLine();
-                Console.Write("Enter Address 2 (Optional): ");
-                addresses[1] = Console.ReadLine();
-                person.Addresses = addresses;
+                
+                
+                person.Address = Console.ReadLine();
                 People.Add(person);
+        }
+        public void EditContact()
+        {
+            Console.WriteLine("enter the first name you want to edit");
+            string firstname=Console.ReadLine();
+            foreach (Contact contact in People)
+            {
+                if (contact.FirstName.ToLower() == firstname.ToLower())
+                {
+                    Console.WriteLine("enter which information you wnat to change");
+                    Console.WriteLine("enter 1 to edit last name,2 to change the city,3 to zip,4 to Email,5 to phonenumber");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    switch(option)
+                    {
+                        case 1:
+                            Console.WriteLine("enter the lastname");
+                            contact.LastName = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.WriteLine("enter the city");
+                            contact.city = Console.ReadLine();
+                            break;
+                        case 3:
+                            Console.WriteLine("enter the zip");
+                            contact.Zip = Console.ReadLine();
+                            break;
+                        case 4:
+                            Console.WriteLine("enter the Email");
+                            contact.Email = Console.ReadLine();
+                            break;
+                        case 5:
+                            Console.WriteLine("enter the phonrnumber");
+                            contact.PhoneNumber = Console.ReadLine();
+                            break;
+
+
+                    }
+                    return;
+                    
+
+
+                }
             }
+            Console.WriteLine("no contact with this firstname");
+
+        }
+
         
     }
 }
