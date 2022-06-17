@@ -13,8 +13,8 @@
 
             while (command != "exit")
             {
-                
-                Console.WriteLine("Please enter a command add,edit,remove,display: ");
+
+                Console.WriteLine("Please enter a command add,edit,remove,display,multipleperson: ");
                 command = Console.ReadLine().ToLower();
 
                 switch (command)
@@ -33,6 +33,12 @@
                     case "display":
                         address.Display();
                         break;
+                    case "multipleperson":
+                        address.AddMultipleContact();
+                        break;
+
+
+
                 }
             }
         }
